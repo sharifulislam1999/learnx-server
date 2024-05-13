@@ -18,6 +18,7 @@ async function run() {
   try {
     const assignmentCollection = client.db("learnx").collection("assignments");
     const takeassignments = client.db("learnx").collection("takeassignments");
+    const commentsCollection = client.db("learnx").collection("comments");
     // await client.connect();
     app.get("/",(req,res)=>{
         res.send("server running")
@@ -46,6 +47,17 @@ async function run() {
         .limit(size)
         .toArray();
         res.send(result);
+    })
+    app.post('/comment',async(req,res)=>{
+        const comment = req.body;
+        const result = await commentsCollection.insertOne(comment)
+        res.send(result);
+    })
+    app.get('/comment/:id',async(req,res)=>{
+        const id = req.params.id;
+        const query = {assaignmentId: id}
+        const result = await commentsCollection.find(query).toArray();
+        res.send(result)
     })
     // jwt
     app.post("/jwt",async(req,res)=>{
