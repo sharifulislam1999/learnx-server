@@ -168,7 +168,7 @@ async function run() {
             }
         }
         const result = await takeassignments.updateOne(filter,updatedTaken,options)
-        res.send(result)
+        res.send(result);
     })
     // Send a ping to confirm a successful connection
     // await client.db("admin").command({ ping: 1 });
