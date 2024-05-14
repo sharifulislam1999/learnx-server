@@ -51,7 +51,7 @@ async function run() {
         const result = await commentsCollection.insertOne(comment)
         res.send(result);
     })
-    app.get('/comment/:id',async(req,res)=>{
+    app.get('/comment/:id',verifyToken,async(req,res)=>{
         const id = req.params.id;
         const query = {assaignmentId: id}
         const result = await commentsCollection.find(query).toArray();
@@ -119,7 +119,7 @@ async function run() {
         res.send(result);
 
     })
-    app.get("/assignment/:id",async(req,res)=>{
+    app.get("/assignment/:id",verifyToken,async(req,res)=>{
         const id = req.params.id;
         const query = {_id: new ObjectId(id)};
         const result = await assignmentCollection.findOne(query);
