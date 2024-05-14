@@ -23,6 +23,7 @@ async function run() {
     app.get("/",(req,res)=>{
         res.send("server running")
     });
+    // middle ware
     const verifyToken = (req,res,next)=>{
         const token = req?.cookies?.token;
         if(!token){
