@@ -11,7 +11,7 @@ app.use(cors({
     credentials: true
 }))
 app.use(express.json())
-const port = process.env.PORT || 6001;
+const port = process.env.PORT || 5000;
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.guoefzb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 const client = new MongoClient(uri);
 async function run() {
@@ -23,8 +23,6 @@ async function run() {
     app.get("/",(req,res)=>{
         res.send("server running")
     });
-
-    // middleware
     
     const verifyToken = (req,res,next)=>{
         const token = req?.cookies?.token;
