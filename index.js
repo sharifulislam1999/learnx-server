@@ -23,7 +23,6 @@ async function run() {
     app.get("/",(req,res)=>{
         res.send("server running")
     });
-    
     const verifyToken = (req,res,next)=>{
         const token = req?.cookies?.token;
         if(!token){
@@ -57,7 +56,7 @@ async function run() {
         const result = await commentsCollection.find(query).toArray();
         res.send(result)
     })
-    // jwt
+    // jwt post api
     app.post("/jwt",async(req,res)=>{
         const user = req.body;
         const token = jwt.sign(user,process.env.TOKEN_SECRET,{expiresIn:'1h'});
@@ -69,7 +68,7 @@ async function run() {
         })
         .send({success:true})
     })
-    // logout
+    // logout api
     app.post('/logout',async(req,res)=>{
         res
         .clearCookie('token',{
